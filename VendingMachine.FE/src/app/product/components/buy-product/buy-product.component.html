@@ -1,0 +1,66 @@
+<div id="modal-content-wrapper">
+
+    <div *ngIf="!isBuySuccesfull">
+        <header id="modal-header">
+            <h1 id="modal-title">Product {{productName}}</h1>
+        </header>
+        <mat-form-field>
+            <mat-label>Amount To Buy</mat-label>
+            <input matInput required [(ngModel)]="amountToBuy">
+        </mat-form-field>
+
+        <footer id="modal-footer">
+
+            <button mat-raised-button id="modal-close-button" (click)="buy()">Buy</button>
+            <button mat-raised-button id="modal-close-button" (click)="closeModal()">Close</button>
+        </footer>
+    </div>
+    <div *ngIf="isBuySuccesfull">
+        <mat-card *ngIf="buyResponse$ | async as buyResponse;">
+            <mat-card-header>
+                <mat-card-title>Receipt {{productName}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field>
+                    <mat-label>Amount Of Purchased Products</mat-label>
+                    <input matInput readonly [ngModel]="buyResponse.countOfPurchasedProducts">
+                </mat-form-field>   
+                <mat-form-field>
+                    <mat-label>Total Spent</mat-label>
+                    <input matInput readonly [ngModel]="buyResponse.totalSpent">
+                </mat-form-field>
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Change</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <mat-label>5 Cents</mat-label>
+                            <input matInput readonly [ngModel]="buyResponse.change.fiveCents">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>10 Cents</mat-label>
+                            <input matInput readonly [ngModel]="buyResponse.change.tenCents">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>20 Cents</mat-label>
+                            <input matInput readonly [ngModel]="buyResponse.change.twentyCents">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>50 Cents</mat-label>
+                            <input matInput readonly [ngModel]="buyResponse.change.fiftyCents">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>100 Cents</mat-label>
+                            <input matInput readonly [ngModel]="buyResponse.change.hundredCents">
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
